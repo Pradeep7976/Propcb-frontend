@@ -40,7 +40,7 @@ const IconGroup = ({
   const data = async () => {
     if (email != null) {
       axios
-        .get(`http://localhost:8080/cart/${email}`)
+        .get(`https://gray-handsome-xerus.cyclic.app/cart/${email}`)
         .then((response) => {
           cartData = response.data.arr;
           setCartData(cartData);

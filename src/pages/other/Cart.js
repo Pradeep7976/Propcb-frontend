@@ -39,7 +39,9 @@ const Cart = ({
   let cartTotalPrice = 0;
   const data = async () => {
     if (email != null) {
-      let response = await axios.get(`http://localhost:8080/cart/${email}`);
+      let response = await axios.get(
+        `https://gray-handsome-xerus.cyclic.app/cart/${email}`
+      );
       if (response.statusCode === 400) {
         console.log("Handle error");
       } else {
@@ -235,13 +237,16 @@ const Cart = ({
                                         email: email,
                                       };
                                       axios
-                                        .delete(`http://localhost:8080/cart`, {
-                                          headers: {
-                                            "x-access-token":
-                                              cookies.get("Authorization"),
-                                          },
-                                          data: deldata,
-                                        })
+                                        .delete(
+                                          `https://gray-handsome-xerus.cyclic.app/cart`,
+                                          {
+                                            headers: {
+                                              "x-access-token":
+                                                cookies.get("Authorization"),
+                                            },
+                                            data: deldata,
+                                          }
+                                        )
                                         .then(() => {
                                           addToast("Deleted successfully", {
                                             appearance: "success",
@@ -280,13 +285,16 @@ const Cart = ({
                               email: email,
                             };
                             axios
-                              .delete("http://localhost:8080/cart", {
-                                headers: {
-                                  "x-access-token":
-                                    cookies.get("Authorization"),
-                                },
-                                data: deldata,
-                              })
+                              .delete(
+                                "https://gray-handsome-xerus.cyclic.app/cart",
+                                {
+                                  headers: {
+                                    "x-access-token":
+                                      cookies.get("Authorization"),
+                                  },
+                                  data: deldata,
+                                }
+                              )
                               .then(() => {
                                 addToast("Deleted successfully", {
                                   appearance: "success",

@@ -24,7 +24,7 @@ const Checkout = ({ location }) => {
   const { addToast } = useToasts();
   const data = async () => {
     if (email != null) {
-      let response = await axios.get(`http://localhost:8080/cart/${email}`);
+      let response = await axios.get(`https://gray-handsome-xerus.cyclic.app/cart/${email}`);
       if (response.statusCode === 400) {
         console.log("Handle error");
       } else {
@@ -122,7 +122,7 @@ const Checkout = ({ location }) => {
       order_id: orderid,
       handler: async function (response) {
         await axios
-          .post("http://localhost:8080/payment/verify", response, {
+          .post("https://gray-handsome-xerus.cyclic.app/payment/verify", response, {
             headers: {
               "x-access-token": cookies.get("Authorization"),
               "x-razorpay-signature": response.razorpay_signature,
@@ -134,7 +134,7 @@ const Checkout = ({ location }) => {
             });
             await axios
               .put(
-                `http://localhost:8080/billing/${billid}`,
+                `https://gray-handsome-xerus.cyclic.app/billing/${billid}`,
                 {
                   oid: orderid,
                   pid: response.razorpay_payment_id,
@@ -149,7 +149,7 @@ const Checkout = ({ location }) => {
                 ouuid.map(async (id) => {
                   await axios
                     .put(
-                      `http://localhost:8080/order/${id}`,
+                      `https://gray-handsome-xerus.cyclic.app/order/${id}`,
                       {
                         oid: orderid,
                       },
@@ -269,7 +269,7 @@ const Checkout = ({ location }) => {
   //         )
   //         .then((shipres) => {
   //           axios
-  //             .delete("http://localhost:8080/cart", {
+  //             .delete("https://gray-handsome-xerus.cyclic.app/cart", {
   //               headers: {
   //                 "x-access-token": cookies.get("Authorization"),
   //               },
@@ -287,7 +287,7 @@ const Checkout = ({ location }) => {
   //             .catch(async () => {
   //               if(setcheckflag){
   //                 await axios.delete(
-  //                   `http://localhost:8080/billing/${billid}`,
+  //                   `https://gray-handsome-xerus.cyclic.app/billing/${billid}`,
   //                   {
   //                     headers: {
   //                       "x-access-token": cookies.get("Authorization"),
@@ -295,7 +295,7 @@ const Checkout = ({ location }) => {
   //                   }
   //                 );
   //                 orderidarr.map(async (id) => {
-  //                   await axios.delete(`http://localhost:8080/order/${id}`, {
+  //                   await axios.delete(`https://gray-handsome-xerus.cyclic.app/order/${id}`, {
   //                     headers: {
   //                       "x-access-token": cookies.get("Authorization"),
   //                     },
@@ -318,13 +318,13 @@ const Checkout = ({ location }) => {
   //     .catch(async (err) => {
   //       //refund, delete billing and order - shiprocket
   //      if(setcheckflag){
-  //       await axios.delete(`http://localhost:8080/billing/${billid}`, {
+  //       await axios.delete(`https://gray-handsome-xerus.cyclic.app/billing/${billid}`, {
   //         headers: {
   //           "x-access-token": cookies.get("Authorization"),
   //         },
   //       });
   //       orderidarr.map(async (id) => {
-  //         await axios.delete(`http://localhost:8080/order/${id}`, {
+  //         await axios.delete(`https://gray-handsome-xerus.cyclic.app/order/${id}`, {
   //           headers: {
   //             "x-access-token": cookies.get("Authorization"),
   //           },
@@ -347,13 +347,13 @@ const Checkout = ({ location }) => {
   //     });
   // };
   const delorder = async (billid, orderidarr) => {
-    await axios.delete(`http://localhost:8080/billing/${billid}`, {
+    await axios.delete(`https://gray-handsome-xerus.cyclic.app/billing/${billid}`, {
       headers: {
         "x-access-token": cookies.get("Authorization"),
       },
     });
     orderidarr.map(async (id) => {
-      await axios.delete(`http://localhost:8080/order/${id}`, {
+      await axios.delete(`https://gray-handsome-xerus.cyclic.app/order/${id}`, {
         headers: { "x-access-token": cookies.get("Authorization") },
       });
     });
@@ -370,7 +370,7 @@ const Checkout = ({ location }) => {
       return;
     }
     await axios
-      .post("http://localhost:8080/billing/", billData, {
+      .post("https://gray-handsome-xerus.cyclic.app/billing/", billData, {
         headers: {
           "x-access-token": cookies.get("Authorization"),
         },
@@ -378,7 +378,7 @@ const Checkout = ({ location }) => {
       .then(async (res1) => {
         cartItems.map((cartItem) => {
           axios
-            .post("http://localhost:8080/order/", cartItem, {
+            .post("https://gray-handsome-xerus.cyclic.app/order/", cartItem, {
               headers: {
                 "x-access-token": cookies.get("Authorization"),
               },
@@ -392,7 +392,7 @@ const Checkout = ({ location }) => {
               // });
               if(setcheckflag){
                 await axios.delete(
-                  `http://localhost:8080/billing/${res1.data.billid}`,
+                  `https://gray-handsome-xerus.cyclic.app/billing/${res1.data.billid}`,
                   {
                     headers: {
                       "x-access-token": cookies.get("Authorization"),
@@ -400,7 +400,7 @@ const Checkout = ({ location }) => {
                   }
                 );
                 orderidarr.map(async (id) => {
-                  await axios.delete(`http://localhost:8080/order/${id}`, {
+                  await axios.delete(`https://gray-handsome-xerus.cyclic.app/order/${id}`, {
                     headers: { "x-access-token": cookies.get("Authorization") },
                   });
                 });
@@ -412,7 +412,7 @@ const Checkout = ({ location }) => {
         });
         await axios
           .post(
-            "http://localhost:8080/payment/orders",
+            "https://gray-handsome-xerus.cyclic.app/payment/orders",
             { amount: cartTotalPrice },
             {
               headers: {
@@ -427,7 +427,7 @@ const Checkout = ({ location }) => {
             //delete billing and order - api payment
             if(checkflag){
               await axios.delete(
-                `http://localhost:8080/billing/${res1.data.billid}`,
+                `https://gray-handsome-xerus.cyclic.app/billing/${res1.data.billid}`,
                 {
                   headers: {
                     "x-access-token": cookies.get("Authorization"),
@@ -435,7 +435,7 @@ const Checkout = ({ location }) => {
                 }
               );
               orderidarr.map(async (id) => {
-                await axios.delete(`http://localhost:8080/order/${id}`, {
+                await axios.delete(`https://gray-handsome-xerus.cyclic.app/order/${id}`, {
                   headers: { "x-access-token": cookies.get("Authorization") },
                 });
               });

@@ -1074,7 +1074,7 @@ const Quote = ({ location }) => {
                                 email: email,
                               }));
                               let res = await axios.post(
-                                "http://localhost:8080/cart",
+                                "https://gray-handsome-xerus.cyclic.app/cart",
                                 formValues,
                                 {
                                   headers: {

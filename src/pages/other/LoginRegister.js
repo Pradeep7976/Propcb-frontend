@@ -27,7 +27,7 @@ const LoginRegister = ({ location }) => {
   let user = useContext(UserContext);
 
   const Login = async () => {
-    let response = await axios.post(`http://localhost:8080/user/login`, {
+    let response = await axios.post(`https://gray-handsome-xerus.cyclic.app/user/login`, {
       email: email,
       passwords: password,
     });
@@ -48,7 +48,7 @@ const LoginRegister = ({ location }) => {
     console.log(password, confirmPassword);
     if (password === confirmPassword) {
       console.log(password)
-      let response = await axios.post(`http://localhost:8080/user/register`, {
+      let response = await axios.post(`https://gray-handsome-xerus.cyclic.app/user/register`, {
         username: username,
         email: email,
         passwords: password,
